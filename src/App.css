@@ -57,7 +57,7 @@ body {
 .target-card {
 	width: 30rem;
 	background-color: rgba(218, 165, 32, 0.185);
-	text-align: justify;
+	text-align: center;
 	color: gold;
 	font-family: 'Roboto', sans-serif;
 	font-size: 1.2rem;

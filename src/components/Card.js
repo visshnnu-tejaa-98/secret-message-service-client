@@ -7,7 +7,7 @@ const Card = () => {
 	const [password, setPassword] = useState('');
 	const [message, setMessage] = useState('');
 	const [isSending, setIsSending] = useState(false);
-	const [Default, setDefault] = useState(true);
+	const [Default, setDefault] = useState(false);
 
 	// functions
 	const getEmail = (e) => {
@@ -21,11 +21,11 @@ const Card = () => {
 	};
 	const getEntireData = async (e) => {
 		e.preventDefault();
-		let status = false;
 		setIsSending(true);
 		setDefault(true);
 
 		let randomKey = randomstring.generate();
+		// frontend url
 		let targetUrl = 'http://localhost:3001/target';
 		console.log(randomKey);
 		console.log(targetUrl);
@@ -37,7 +37,8 @@ const Card = () => {
 			targetUrl,
 		};
 		console.log(data);
-		await fetch('http://localhost:3000/create-message', {
+		// await fetch('http://localhost:3000/create-message', {
+		await fetch('https://secret-message-service-app.herokuapp.com/create-message', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -107,11 +108,3 @@ const Card = () => {
 };
 
 export default Card;
-
-// {
-//     "randomKey":"ywqkdwyFUYKF4373",
-//     "password":"123",
-//     "mailMessage":"Woo! This is a secret!!",
-//     "targetUrl":"https://loalhost:3000",
-//     "targetMail":"visshnnutejaa@gmail.com"
-// }
