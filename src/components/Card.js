@@ -1,6 +1,5 @@
-import randomstring from 'randomstring';
 import React, { useState } from 'react';
-console.log(randomstring.generate());
+import { Link } from 'react-router-dom';
 const Card = () => {
 	// states
 	const [email, setEmail] = useState('');
@@ -8,6 +7,11 @@ const Card = () => {
 	const [message, setMessage] = useState('');
 	const [isSending, setIsSending] = useState(false);
 	const [Default, setDefault] = useState(false);
+	const [randomKey, setRandomKey] = useState(
+		Math.random().toString(32).toUpperCase().split('.')[1]
+	);
+
+	// let randomKey = Math.random().toString(32).toUpperCase().split('.')[1];
 
 	// functions
 	const getEmail = (e) => {
@@ -19,15 +23,16 @@ const Card = () => {
 	const getMessage = (e) => {
 		setMessage(e.target.value);
 	};
+
 	const getEntireData = async (e) => {
 		e.preventDefault();
 		setIsSending(true);
 		setDefault(true);
 
-		let randomKey = randomstring.generate();
 		// frontend url
 		// let targetUrl = 'http://localhost:3001/target';
-		let targetUrl = 'https://visshnnu-secret-message-service-app.netlify.app/target';
+		let targetUrl = 'http://localhost:3001/target';
+		// let targetUrl = 'https://visshnnu-secret-message-service-app.netlify.app/target';
 		console.log(randomKey);
 		console.log(targetUrl);
 		let data = {
@@ -40,6 +45,7 @@ const Card = () => {
 		console.log(data);
 		// await fetch('http://localhost:3000/create-message', {
 		await fetch('https://secret-message-service-app.herokuapp.com/create-message', {
+			// await fetch('https://secret-message-service-app.herokuapp.com/create-message', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -60,31 +66,50 @@ const Card = () => {
 					<div className='card'>
 						<div className='card-body'>
 							<form action='' onSubmit={getEntireData}>
-								<div className='form-group'>
-									<label htmlFor='targetMail'>To Email Id:</label>
-									<input
-										type='email'
-										className='form-control'
-										id='targetMail'
-										name='targetMail'
-										placeholder='To Email Id'
-										value={email}
-										onChange={getEmail}
-										required
-									/>
+								<div className='row'>
+									<div className='col col-6'>
+										<div className='form-group'>
+											<label htmlFor='targetMail'>Target Email:</label>
+											<input
+												type='email'
+												className='form-control'
+												id='targetMail'
+												name='targetMail'
+												placeholder='To Email Id'
+												value={email}
+												onChange={getEmail}
+												required
+											/>
+										</div>
+									</div>
+									<div className='col col-6'>
+										<div className='form-group'>
+											<label htmlFor='password'>Password:</label>
+											<input
+												type='password'
+												className='form-control'
+												id='password'
+												name='password'
+												placeholder='password'
+												onChange={getPassword}
+												required
+											/>
+										</div>
+									</div>
 								</div>
 								<div className='form-group'>
-									<label htmlFor='password'>Password:</label>
+									<label htmlFor='randomKey'>Secret Key:</label>
 									<input
-										type='password'
+										type='text'
 										className='form-control'
-										id='password'
-										name='password'
-										placeholder='password'
-										onChange={getPassword}
-										required
+										id='randomKey'
+										name='randomKey'
+										value={randomKey}
+										readOnly
 									/>
+									<small className='smallTag'>Copy random key to delete the secret message *</small>
 								</div>
+
 								<div className='form-group'>
 									<label htmlFor='mailMessage'>Secret Message:</label>
 									<textarea
@@ -96,9 +121,20 @@ const Card = () => {
 										onChange={getMessage}
 									></textarea>
 								</div>
-								<button type='submit' className='btn submitBtn btn-block'>
-									{isSending ? 'Sending' : Default ? 'Message Sent' : 'Send Message'}
-								</button>
+								<div className='row'>
+									<div className='col col-6'>
+										<Link to='./delete'>
+											<button type='button' className='btn btn-block deleteBtn'>
+												Delete Message
+											</button>
+										</Link>
+									</div>
+									<div className='col col-6'>
+										<button type='submit' className='btn submitBtn btn-block '>
+											{isSending ? 'Sending' : Default ? 'Message Sent' : 'Send Message'}
+										</button>
+									</div>
+								</div>
 							</form>
 						</div>
 					</div>
