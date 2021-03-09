@@ -6,16 +6,21 @@ import { BrowserRouter, Route, Link, Switch } from 'react-router-dom';
 function App() {
 	return (
 		<BrowserRouter>
-			<div>
-				<Switch>
-					<Route path='/' exact>
-						<Home />
-					</Route>
-					<Route path='/target' exact>
-						<Target />
-					</Route>
-				</Switch>
-			</div>
+			<Switch>
+				<Route
+					exact
+					path='/'
+					render={(props) => {
+						return <Home />;
+					}}
+				></Route>
+				<Route
+					path='/target'
+					render={(props) => {
+						return <Target />;
+					}}
+				></Route>
+			</Switch>
 		</BrowserRouter>
 	);
 }

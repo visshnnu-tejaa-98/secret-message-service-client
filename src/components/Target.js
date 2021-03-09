@@ -5,6 +5,7 @@ const Target = () => {
 		console.log(window.location.href);
 		let url = window.location.href;
 		let id = url.split('rs=')[1];
+		console.log(id);
 		// let response = await fetch(`http://localhost:3000/message-by-id/${id}`);
 		let response = await fetch(
 			`https://secret-message-service-app.herokuapp.com/message-by-id/${id}`
