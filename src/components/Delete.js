@@ -18,8 +18,8 @@ const Delete = () => {
 			password: password,
 		};
 		console.log(data);
-		// let req = await fetch('http://localhost:3000/delete-message', {
-		let req = await fetch('https://secret-message-service-app.herokuapp.com/delete-message', {
+		let req = await fetch('http://localhost:3000/delete-message', {
+			// let req = await fetch('https://secret-message-service-app.herokuapp.com/delete-message', {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',

@@ -31,8 +31,8 @@ const Card = () => {
 
 		// frontend url
 		// let targetUrl = 'http://localhost:3001/target';
-		let targetUrl = 'http://localhost:3001/target';
-		// let targetUrl = 'https://visshnnu-secret-message-service-app.netlify.app/target';
+		// let targetUrl = 'http://localhost:3001/target';
+		let targetUrl = 'https://visshnnu-secret-message-service-app.netlify.app/target';
 		console.log(randomKey);
 		console.log(targetUrl);
 		let data = {
